@@ -34,10 +34,9 @@ public interface UserService {
     /**
      * 会员注册时同时添加角色信息
      * @param user  用户信息
-     * @param roleType 角色类型
      * @return 是否注册成功
      */
-    boolean reg(TbUsers user, String roleType);
+    boolean reg(TbUsers user);
 
     /**
      * 查询所有用户信息
