@@ -148,7 +148,7 @@
 								  <td th:text="${u.email}"></td>
 								  <td th:text="${#dates.format(u.createtime, 'yyyy-MM-dd HH:mm:ss')}"></td>
 								  <td>
-									  <a type="button" class="btn btn-success btn-xs" th:href="@{assignrole(userId=${u.userid})}"><i class=" glyphicon glyphicon-check"></i></a>
+									  <a type="button" class="btn btn-success btn-xs" th:href="@{assign_role(userId=${u.userid})}"><i class=" glyphicon glyphicon-check"></i></a>
 <!--									  <a type="button" class="btn btn-primary btn-xs" th:href="@{updateview(userId=${u.userid})}"><i class=" glyphicon glyphicon-pencil"></i></a>-->
 <!--									  <a type="button" class="btn btn-danger btn-xs" th:href="@{deleteuser(ids=${u.userid})}"><i class=" glyphicon glyphicon-remove"></i></a>-->
 								  </td>

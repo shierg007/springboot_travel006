@@ -13,7 +13,7 @@ public class RoleController {
         return "role";
     }
 
-    @RequestMapping("/assignpermission")
+    @RequestMapping("/assign_permission")
     public String assignPermission(){
         return "assignPermission";
     }

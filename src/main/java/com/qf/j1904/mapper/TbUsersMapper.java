@@ -112,4 +112,10 @@ public interface TbUsersMapper {
      * @return 该账号拥有的权限集合
      */
     List<TbPermissions> selectPermissionsByLoginName(String loginName);
+
+    /**
+     * 查询最大id
+     * @return 最大id
+     */
+    int maxUserId();
 }

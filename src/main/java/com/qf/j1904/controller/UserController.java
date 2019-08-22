@@ -128,7 +128,7 @@ public class UserController {
     }
 
 
-    @RequestMapping("/assignrole")
+    @RequestMapping("/assign_role")
     public String assignRole(@RequestParam("userId") Integer userId){
         return "assignRole";
     }

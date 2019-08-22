@@ -307,6 +307,7 @@
         values
         (#{uid},#{rid})
   </insert>
+<!--  查询用户的权限信息-->
   <select id="selectPermissionsByLoginName" resultType="com.qf.j1904.pojo.TbPermissions" parameterType="string">
         select
             p.*
@@ -323,4 +324,11 @@
             and rp.pid = p.permissionId
             and u.loginName = #{loginName}
     </select>
+<!--  查询最大id-->
+  <select id="maxUserId" resultType="int">
+    select
+        MAX(userId)
+        from
+        tb_users
+  </select>
 </mapper>

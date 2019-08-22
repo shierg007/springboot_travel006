@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean reg(TbUsers user,String roleDesc) {
-        int maxId = userMapper.countByExample(null);
+        int maxId = userMapper.maxUserId();
         int count = userMapper.insertSelective(user);
         Map<String,Integer> map = new HashMap<>();
         map.put("uid",maxId+1);
