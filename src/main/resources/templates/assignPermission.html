@@ -33,7 +33,7 @@
 				<div class="btn-group">
 				  <button type="button" class="btn btn-default btn-success dropdown-toggle" data-toggle="dropdown">
 					<i class="glyphicon glyphicon-user"></i> 张三 <span class="caret"></span>
-<!--					  <input type="hidden" th:value="${roleId}" id="roleId">-->
+					  <input type="hidden" th:value="${roleId}" id="roleId">
 				  </button>
 					  <ul class="dropdown-menu" role="menu">
 						<li><a href="#"><i class="glyphicon glyphicon-cog"></i> 个人设置</a></li>
@@ -68,7 +68,7 @@
 						<span><i class="glyphicon glyphicon glyphicon-tasks"></i> 权限管理 <span class="badge" style="float:right">3</span></span> 
 						<ul style="margin-top:10px;">
 							<li style="height:30px;">
-								<a th:href=@{user_handler(userId=${userId},nickName=${nickName})}><i class="glyphicon glyphicon-user"></i> 用户维护</a>
+								<a th:href="@{user_handler(userId=${userId},nickName=${nickName})}"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
 							</li>
 							<li style="height:30px;">
 								<a th:href="@{role_handler(userId=${userId},nickName=${nickName})}" style="color:red;"><i class="glyphicon glyphicon-king"></i> 角色维护</a>
@@ -179,7 +179,7 @@
 				async: {
 					enable: true,
 					//ajax异步取数据的地址
-					url:"currentpermission?roleId="+roleId,
+					url:"currentPermission?roleId="+roleId,
 					//自动提交的参数
 					autoParam:["id"]
 				},
@@ -198,7 +198,7 @@
 					},
 					key:{
 						//填充内容：对应的列名
-						name:"pname"
+						name:"permissionname"
 					}
 				}
 			};
@@ -211,7 +211,7 @@
 				for(var i=0; i<nodes.length;i++){
 					pids += i===nodes.length-1 ? nodes[i].id : nodes[i].id+"-";
 				}
-				$.post("assignpermission",{"roleId":roleId,"pids":pids},function (data) {
+				$.post("assignPermission",{"roleId":roleId,"pids":pids},function (data) {
 					// alert(data);
 					alert(data=="true"?"授权成功":"授权失败")
 				})

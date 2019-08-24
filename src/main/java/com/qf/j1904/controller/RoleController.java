@@ -18,6 +18,15 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
+    /**
+     * 展示所有角色嘻嘻纳西
+     * @param rows 每页显示行数
+     * @param page 当前页码
+     * @param userId 当前用户id
+     * @param nickName 当前用户昵称
+     * @param model
+     * @return 所有角色展示页
+     */
     @RequiresPermissions(value = {"角色维护"})
     @RequestMapping("/role_handler")
     public String showRoles(@RequestParam(defaultValue = "8",required = false) int rows,
@@ -41,10 +50,28 @@ public class RoleController {
         return "role";
     }
 
+    /**
+     * 分配权限页面跳转
+     * @return 给角色分配权限页面
+     */
     @RequestMapping("/assign_permission")
-    public String assignPermission(){
+    public String assignPermission(@RequestParam("userId")Integer userId,
+                                   @RequestParam("nickName")String nickName,
+                                   @RequestParam("roleId")Integer roleId,
+                                   Model model){
+        model.addAttribute("userId",userId);
+        model.addAttribute("nickName",nickName);
+        model.addAttribute("roleId",roleId);
         return "assignPermission";
     }
+
+    /**
+     * 增加角色页面添砖
+     * @param userId 当前用户id
+     * @param nickName 当前用户昵称
+     * @param model
+     * @return 增加角色页面
+     */
     @RequestMapping("/addroleview")
     public String addRoleView(@RequestParam("userId")Integer userId,
                               @RequestParam("nickName")String nickName,

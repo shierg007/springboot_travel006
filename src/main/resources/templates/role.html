@@ -67,7 +67,7 @@
 						<span><i class="glyphicon glyphicon glyphicon-tasks"></i> 权限管理 <span class="badge" style="float:right">3</span></span> 
 						<ul style="margin-top:10px;">
 							<li style="height:30px;">
-								<a th:href=@{user_handler(userId=${userId},nickName=${nickName})}><i class="glyphicon glyphicon-user"></i> 用户维护</a>
+								<a th:href="@{user_handler(userId=${userId},nickName=${nickName})}"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
 							</li>
 							<li style="height:30px;">
 								<a th:href="@{role_handler(userId=${userId},nickName=${nickName})}" style="color:red;"><i class="glyphicon glyphicon-king"></i> 角色维护</a>
@@ -148,7 +148,7 @@
 					<td th:text="${r.roletype}"></td>
 					<td th:text="${r.ifvalid}"></td>
 				<td>
-				      <a type="button" class="btn btn-success btn-xs" th:href="@{assign_permission(roleId=${r.roleid})}"><i class=" glyphicon glyphicon-check"></i></a>
+				      <a type="button" class="btn btn-success btn-xs" th:href="@{assign_permission(roleId=${r.roleid},userId=${userId},nickName=${nickName})}"><i class=" glyphicon glyphicon-check"></i></a>
 <!--				      <a type="button" class="btn btn-primary btn-xs" th:href="@{loadbyroleId(roleId=${r.roleId})}"><i class=" glyphicon glyphicon-pencil"></i></a>-->
 <!--					  <a type="button" class="btn btn-danger btn-xs" th:href="@{deleterole(ids=${r.roleId})}"><i class=" glyphicon glyphicon-remove" ></i></a>-->
 				 </td>
