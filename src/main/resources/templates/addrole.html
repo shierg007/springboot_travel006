@@ -69,10 +69,10 @@
                                 <a th:href=@{user_handler(userId=${userId},nickName=${nickName})} style="color:red;"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
                             </li>
                             <li style="height:30px;">
-                                <a href="role_handler"><i class="glyphicon glyphicon-certificate"></i> 角色维护</a>
+                                <a th:href="@{role_handler(userId=${userId},nickName=${nickName})}"><i class="glyphicon glyphicon-certificate"></i> 角色维护</a>
                             </li>
                             <li style="height:30px;">
-                                <a href="permission_handler"><i class="glyphicon glyphicon-lock"></i> 许可维护</a>
+                                <a th:href="@{permission_handler(userId=${userId},nickName=${nickName})}"><i class="glyphicon glyphicon-lock"></i> 许可维护</a>
                             </li>
                         </ul>
                     </li>
