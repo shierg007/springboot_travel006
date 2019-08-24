@@ -148,7 +148,7 @@
 					<td th:text="${r.roletype}"></td>
 					<td th:text="${r.ifvalid}"></td>
 				<td>
-				      <a type="button" class="btn btn-success btn-xs" th:href="@{assign_permission}"><i class=" glyphicon glyphicon-check"></i></a>
+				      <a type="button" class="btn btn-success btn-xs" th:href="@{assign_permission(roleId=${r.roleid})}"><i class=" glyphicon glyphicon-check"></i></a>
 <!--				      <a type="button" class="btn btn-primary btn-xs" th:href="@{loadbyroleId(roleId=${r.roleId})}"><i class=" glyphicon glyphicon-pencil"></i></a>-->
 <!--					  <a type="button" class="btn btn-danger btn-xs" th:href="@{deleterole(ids=${r.roleId})}"><i class=" glyphicon glyphicon-remove" ></i></a>-->
 				 </td>

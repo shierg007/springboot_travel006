@@ -110,7 +110,11 @@ public interface UserService {
      */
     List<TbRoles> managedRoles(int userId);
 
-
-
-
+    /**
+     * 添加管理员
+     * @param user 用户信息
+     * @param roleId 角色id
+     * @return 是否成功
+     */
+    boolean addUserOfAdmin(TbUsers user, int roleId);
 }

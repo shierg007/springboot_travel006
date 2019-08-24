@@ -123,7 +123,7 @@
 				  </form>
 				  <form action="deleteuser" method="post">
 					  <button type="submit" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
-					  <a type="button" class="btn btn-primary" style="float:right;" th:href="@{add_view(userId=${userId})}"><i class="glyphicon glyphicon-plus"></i> 新增</a>
+					  <a type="button" class="btn btn-primary" style="float:right;" th:href="@{add_view(userId=${userId},nickName=${nickName})}"><i class="glyphicon glyphicon-plus"></i> 新增</a>
 					  <br>
 					  <hr style="clear:both;">
 					  <div class="table-responsive">
@@ -158,11 +158,11 @@
 							  <tr >
 								  <td colspan="7" align="center">
 									  <ul class="pagination">
-										  <li ><a th:href="@{user_handler(page=1)}">首页</a></li>
-										  <li ><a th:href="@{user_handler(page=${currentPage-1})}">上一页</a></li>
+										  <li ><a th:href="@{user_handler(page=1,userId=${userId},nickName=${nickName})}">首页</a></li>
+										  <li ><a th:href="@{user_handler(page=${currentPage-1},userId=${userId},nickName=${nickName})}">上一页</a></li>
 										  <li class="active" ><a th:text="${currentPage}"> <span class="sr-only">(current)</span></a></li>
-										  <li><a th:href="@{user_handler(page=${currentPage+1})}">下一页</a></li>
-										  <li><a th:href="@{user_handler(page=${calcMaxPage})}">末页</a></li>
+										  <li><a th:href="@{user_handler(page=${currentPage+1},userId=${userId},nickName=${nickName})}">下一页</a></li>
+										  <li><a th:href="@{user_handler(page=${calcMaxPage},userId=${userId},nickName=${nickName})}">末页</a></li>
 									  </ul>
 								  </td>
 							  </tr>

@@ -72,9 +72,12 @@ public class ViewController {
 
     @RequestMapping("/add_view")
     public String addView(@RequestParam("userId") int userId,
+                          @RequestParam("nickName")String nickName,
                           Model model){
         List<TbRoles> managedRoles = userService.managedRoles(userId);
         model.addAttribute("managedRoles",managedRoles);
+        model.addAttribute("userId",userId);
+        model.addAttribute("nickName",nickName);
         return "add";
     }
 

@@ -122,4 +122,15 @@ public class UserServiceImpl implements UserService {
         }
         return userMapper.managedRoles(roleId);
     }
+
+    @Override
+    public boolean addUserOfAdmin(TbUsers user, int roleId) {
+        int maxUserId = userMapper.maxUserId();
+        int count1 = userMapper.insertSelective(user);
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("uid",maxUserId+1);
+        map.put("rid",roleId);
+        int count2 = userMapper.addRole(map);
+        return count1>0 && count2>0;
+    }
 }

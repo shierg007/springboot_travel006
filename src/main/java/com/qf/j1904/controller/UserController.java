@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -194,5 +195,16 @@ public class UserController {
         model.addAttribute("calcMaxPage",calcMaxPage);
         model.addAttribute("keywords",keywords);
         return "fq_user";
+    }
+
+    @RequestMapping("/add_user")
+    public String addUserOfAdmin(@RequestParam("roleId")int roleId,
+                                 @RequestParam("userId")Integer userId,
+                                 @RequestParam("nickName")String nickName,
+                                 TbUsers user, RedirectAttributes attributes){
+        boolean b = userService.addUserOfAdmin(user, roleId);
+        attributes.addAttribute("userId",userId);
+        attributes.addAttribute("nickName",nickName);
+        return b ? "redirect:user_handler" : "error";
     }
 }
