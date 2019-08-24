@@ -109,4 +109,6 @@ public interface UserService {
      * @return 可以管理的角色
      */
     List<TbRoles> managedRoles(int userId);
+
+    boolean addUserOfAdmin(TbUsers user,int roleId);
 }

@@ -104,7 +104,8 @@
     values (#{roleid,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR}, #{roletype,jdbcType=VARCHAR}, 
       #{ifvalid,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.qf.j1904.pojo.TbRoles" >
+  <insert id="
+" parameterType="com.qf.j1904.pojo.TbRoles" >
     insert into tb_roles
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="roleid != null" >

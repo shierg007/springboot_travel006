@@ -195,4 +195,15 @@ public class UserController {
         model.addAttribute("keywords",keywords);
         return "fq_user";
     }
+
+    @RequestMapping("/add_user")
+    public String addUserOfAdmin(@RequestParam("roleId")int roleId,
+                                 @RequestParam("userId")Integer userId,
+                                 @RequestParam("nickname")String nickName,
+                                 TbUsers user,Model model){
+        boolean b = userService.addUserOfAdmin(user, roleId);
+        model.addAttribute("userId",userId);
+        model.addAttribute("nickName",nickName);
+        return b ? "redirect:user_handler" : "error";
+    }
 }

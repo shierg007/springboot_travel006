@@ -31,7 +31,7 @@
             <li style="padding-top:8px;">
 				<div class="btn-group">
 				  <button type="button" class="btn btn-default btn-success dropdown-toggle" data-toggle="dropdown">
-					<i class="glyphicon glyphicon-user"></i> 张三 <span class="caret"></span>
+					<i class="glyphicon glyphicon-user"></i> <span th:text="${nickName}"></span> <span class="caret"></span>
 				  </button>
 					  <ul class="dropdown-menu" role="menu">
 						<li><a href="#"><i class="glyphicon glyphicon-cog"></i> 个人设置</a></li>
@@ -66,13 +66,13 @@
 						<span><i class="glyphicon glyphicon glyphicon-tasks"></i> 权限管理 <span class="badge" style="float:right">3</span></span> 
 						<ul style="margin-top:10px;">
 							<li style="height:30px;">
-								<a href="/userhandler" style="color:red;"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
+								<a href="user_handler" style="color:red;"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
 							</li>
 							<li style="height:30px;">
-								<a href="/rolehandler"><i class="glyphicon glyphicon-certificate"></i> 角色维护</a>
+								<a href="role_handler"><i class="glyphicon glyphicon-certificate"></i> 角色维护</a>
 							</li>
 							<li style="height:30px;">
-								<a href="permission.html"><i class="glyphicon glyphicon-lock"></i> 许可维护</a> 
+								<a href="permission_handler"><i class="glyphicon glyphicon-lock"></i> 许可维护</a>
 							</li>
 						</ul>
 					</li>
@@ -134,11 +134,13 @@
 				<form role="form" action="add_user" method="post">
 				  <div class="form-group">
 					<label for="loginname">登陆账号</label>
-					<input type="text" class="form-control" id="loginname" name="loginname" placeholder="请输入登陆账号">
+					  <input type="text" class="form-control" id="loginname" name="loginname" placeholder="请输入登陆账号">
+					  <input type="hidden" th:value="${userId}" name="userId">
+					  <input type="hidden" th:value="${nickName}" name="nickname">
 				  </div>
 					<div class="form-group">
 						<label for="password">登陆密码</label>
-						<input type="text" class="form-control" id="password" name="password" placeholder="请输入密码">
+						<input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
 					</div>
 				  <div class="form-group">
 					<label for="nickName">用户名称</label>
