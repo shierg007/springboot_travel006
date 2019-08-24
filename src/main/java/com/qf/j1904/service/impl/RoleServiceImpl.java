@@ -26,4 +26,9 @@ public class RoleServiceImpl implements RoleService {
         int roleCount = rolesMapper.countByExample(null);
         return roleCount%rows == 0 ? roleCount/rows : roleCount/rows+1;
     }
+
+    @Override
+    public boolean insertRole(TbRoles role) {
+        return rolesMapper.insertSelective(role)>0;
+    }
 }

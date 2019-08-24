@@ -108,9 +108,7 @@
 " parameterType="com.qf.j1904.pojo.TbRoles" >
     insert into tb_roles
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="roleid != null" >
         roleId,
-      </if>
       <if test="rolename != null" >
         roleName,
       </if>
@@ -122,9 +120,7 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="roleid != null" >
-        #{roleid,jdbcType=INTEGER},
-      </if>
+        default ,
       <if test="rolename != null" >
         #{rolename,jdbcType=VARCHAR},
       </if>

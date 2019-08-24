@@ -80,4 +80,5 @@ public class ViewController {
         model.addAttribute("nickName",nickName);
         return "add";
     }
+
 }

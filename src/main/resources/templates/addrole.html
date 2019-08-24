@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="UTF-8">
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,7 +31,7 @@
                 <li style="padding-top:8px;">
                     <div class="btn-group">
                         <button type="button" class="btn btn-default btn-success dropdown-toggle" data-toggle="dropdown">
-                            <i class="glyphicon glyphicon-user"></i> 张三 <span class="caret"></span>
+                            <i class="glyphicon glyphicon-user"></i> <span th:text="${nickName}"></span><span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#"><i class="glyphicon glyphicon-cog"></i> 个人设置</a></li>
@@ -100,25 +100,12 @@
                                 <a href="type.html"><i class="glyphicon glyphicon-equalizer"></i> 分类管理</a>
                             </li>
                             <li style="height:30px;">
-                                <a href="process.html"><i class="glyphicon glyphicon-random"></i> 流程管理</a>
-                            </li>
+                            <a href="process.html"><i class="glyphicon glyphicon-random"></i> 流程管理</a>
+                        </li>
                             <li style="height:30px;">
                                 <a href="advertisement.html"><i class="glyphicon glyphicon-hdd"></i> 广告管理</a>
                             </li>
-                            <li style="height:30px;">
-                                <a href="message.html"><i class="glyphicon glyphicon-comment"></i> 消息模板</a>
-                            </li>
-                            <li style="height:30px;">
-                                <a href="project_type.html"><i class="glyphicon glyphicon-list"></i> 项目分类</a>
-                            </li>
-                            <li style="height:30px;">
-                                <a href="tag.html"><i class="glyphicon glyphicon-tags"></i> 项目标签</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="list-group-item tree-closed" >
-                        <a href="param.html"><i class="glyphicon glyphicon-list-alt"></i> 参数管理</a>
-                    </li>
+
                 </ul>
             </div>
         </div>
@@ -131,10 +118,17 @@
             <div class="panel panel-default">
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
-                    <form role="form" action="addrole" method="post">
+                    <form role="form" action="add_role" method="post">
                         <div class="form-group">
                             <label for="roleName">角色名称</label>
-                            <input type="text" class="form-control" id="roleName" name="roleName" placeholder="请输入新角色名称">
+                            <input type="text" class="form-control" id="roleName" name="rolename" placeholder="请输入角色名称..">
+                            <input type="hidden" th:value="${userId}" name="userId">
+                            <input type="hidden" th:value="${nickName}" name="nickName">
+                            <label>选择角色类型</label>
+                            <select class="form-control" name="roletype">
+                                <option value="member">member</option>
+                                <option value="admin">admin</option>
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
                         <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
