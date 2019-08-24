@@ -21,6 +21,27 @@ public interface RoleService {
      */
     int calcMaxPage(int rows);
 
-
+    /**
+     * 添加新角色
+     * @param role 新角色的名称
+     * @return 是否成功
+     */
     boolean insertRole(TbRoles role);
+
+    /**
+     * 多条件模糊查询角色信息
+     * @param page 页码
+     * @param rows  每页显示的行数
+     * @param keyWords 模糊查询的关键字
+     * @return 满足条件的角色信息
+     */
+    List<TbRoles> fuzzyQueryRole(int page,int rows,String keyWords);
+
+    /**
+     * 模糊查询后显示的最大页码数
+     * @param rows 每页显示的行数
+     * @param keyWords
+     * @return 最大页码
+     */
+    int calcFuzzyQueryUserMaxPage(int rows,String keyWords);
 }
