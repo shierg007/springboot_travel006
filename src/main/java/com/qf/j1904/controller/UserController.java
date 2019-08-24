@@ -5,6 +5,7 @@ import com.qf.j1904.pojo.TbUsers;
 import com.qf.j1904.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -97,6 +98,8 @@ public class UserController {
                     return "redirect:main";
                 }
             }
+        } catch (IncorrectCredentialsException e){
+            System.out.println("密码错误");
         } catch (AuthenticationException e) {
             e.printStackTrace();
         }
@@ -181,6 +184,8 @@ public class UserController {
     @RequestMapping("/fuzzy_query_user")
     public String fuzzyQueryUser(@RequestParam(defaultValue = "1",required = false)int page,
                                  @RequestParam(defaultValue = "8",required = false)int rows,
+                                 @RequestParam("userId")Integer userId,
+                                 @RequestParam("nickName")String nickName,
                                  String keywords,Model model){
         int calcMaxPage = userService.calcFuzzyQueryUserMaxPage(rows,keywords);
         if (page<1){
@@ -194,6 +199,8 @@ public class UserController {
         model.addAttribute("currentPage",page);
         model.addAttribute("calcMaxPage",calcMaxPage);
         model.addAttribute("keywords",keywords);
+        model.addAttribute("userId",userId);
+        model.addAttribute("nickName",nickName);
         return "fq_user";
     }
 

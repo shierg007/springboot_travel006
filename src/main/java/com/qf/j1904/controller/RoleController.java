@@ -45,6 +45,7 @@ public class RoleController {
     public String assignPermission(){
         return "assignPermission";
     }
+
     @RequestMapping("/addroleview")
     public String addRoleView(@RequestParam("userId")Integer userId,
                               @RequestParam("nickName")String nickName,
@@ -53,6 +54,15 @@ public class RoleController {
         model.addAttribute("nickName",nickName);
         return "addrole";
     }
+
+    /**
+     *  添加新角色
+     * @param role 角色信息
+     * @param userId 用户的id
+     * @param nickName 真实姓名
+     * @param attributes 重定向传参
+     * @return 添加成功与否
+     */
     @RequestMapping("/add_role")
     public String addRoleView(TbRoles role,
                               @RequestParam("userId")Integer userId,
@@ -62,5 +72,27 @@ public class RoleController {
         attributes.addAttribute("userId",userId);
         attributes.addAttribute("nickName",nickName);
         return b ? "redirect:role_handler" : "error";
+    }
+    @RequestMapping("/fuzzy_query_role")
+    public String fuzzyQueryRole(@RequestParam(value = "page",defaultValue = "1",required = false)int page,
+                                 @RequestParam(value = "rows",defaultValue = "8",required = false)int rows,
+                                 @RequestParam("userId")Integer userId,
+                                 @RequestParam("nickName")String nickName,
+                                 String keyWords,Model model){
+        int maxPage = roleService.calcFuzzyQueryUserMaxPage(rows, keyWords);
+        if (page<1){
+            page=maxPage;
+        }
+        if (page>maxPage){
+            page=1;
+        }
+        List<TbRoles> tbRoles = roleService.fuzzyQueryRole(page, rows, keyWords);
+        model.addAttribute("roles",tbRoles);
+        model.addAttribute("currentPage",page);
+        model.addAttribute("maxPage",maxPage);
+        model.addAttribute("keyWords",keyWords);
+        model.addAttribute("userId",userId);
+        model.addAttribute("nickName",nickName);
+        return "fq_role";
     }
 }

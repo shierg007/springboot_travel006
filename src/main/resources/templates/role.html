@@ -25,7 +25,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
-          <div><a class="navbar-brand" style="font-size:32px;" href="#">众筹平台 - 角色维护</a></div>
+          <div><a class="navbar-brand" style="font-size:32px;" href="#">千峰旅游网 - 角色维护</a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -67,7 +67,7 @@
 						<span><i class="glyphicon glyphicon glyphicon-tasks"></i> 权限管理 <span class="badge" style="float:right">3</span></span> 
 						<ul style="margin-top:10px;">
 							<li style="height:30px;">
-								<a th:href=@{user_handler(userId=${userId},nickName=${nickName})}><i class="glyphicon glyphicon-user"></i> 用户维护</a>
+								<a th:href="@{user_handler(userId=${userId},nickName=${nickName})}"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
 							</li>
 							<li style="height:30px;">
 								<a th:href="@{role_handler(userId=${userId},nickName=${nickName})}" style="color:red;"><i class="glyphicon glyphicon-king"></i> 角色维护</a>
@@ -114,11 +114,13 @@
 				<h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 数据列表</h3>
 			  </div>
 			  <div class="panel-body">
-<form class="form-inline" role="form" style="float:left;" action="fuzzyqueryrole" method="post">
+<form class="form-inline" role="form" style="float:left;" action="fuzzy_query_role" method="post">
   <div class="form-group has-feedback">
     <div class="input-group">
       <div class="input-group-addon">查询条件r</div>
       <input class="form-control has-success" type="text" placeholder="请输入查询条件" name="keyWords">
+		<input type="hidden" name="userId" th:value="${userId}">
+		<input type="hidden" name="nickName" th:value="${nickName}">
     </div>
   </div>
   <button type="submit" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>

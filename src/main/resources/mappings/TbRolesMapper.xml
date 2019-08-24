@@ -137,6 +137,20 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <select id="fuzzyQueryRole" resultType="com.qf.j1904.pojo.TbRoles" parameterType="map">
+    select *
+    from tb_roles
+    where
+    roleName like #{roleName}
+    or roleType like #{roleType}
+  </select>
+  <select id="fuzzyQueryRoleCount" resultType="int" parameterType="map">
+    select count(roleId)
+    from tb_roles
+    where
+    roleName like #{roleName}
+    or roleType like #{roleType}
+  </select>
   <update id="updateByExampleSelective" parameterType="map" >
     update tb_roles
     <set >

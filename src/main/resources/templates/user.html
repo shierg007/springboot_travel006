@@ -67,7 +67,7 @@
 						<span><i class="glyphicon glyphicon glyphicon-tasks"></i> 权限管理 <span class="badge" style="float:right">3</span></span>
 						<ul style="margin-top:10px;display:none;">
 							<li style="height:30px;">
-								<a th:href=@{user_handler(userId=${userId},nickName=${nickName})}><i class="glyphicon glyphicon-user"></i> 用户维护</a>
+								<a th:href="@{user_handler(userId=${userId},nickName=${nickName})}"><i class="glyphicon glyphicon-user"></i> 用户维护</a>
 							</li>
 							<li style="height:30px;">
 								<a th:href="@{role_handler(userId=${userId},nickName=${nickName})}"><i class="glyphicon glyphicon-king"></i> 角色维护</a>
@@ -117,6 +117,8 @@
 						  <div class="input-group">
 							  <div class="input-group-addon">查询条件</div>
 							  <input class="form-control has-success" type="text" placeholder="请输入查询条件" name="keywords">
+							  <input type="hidden" name="userId" th:value="${userId}">
+							  <input type="hidden" name="nickName" th:value="${nickName}">
 						  </div>
 					  </div>
 					  <button type="submit" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
