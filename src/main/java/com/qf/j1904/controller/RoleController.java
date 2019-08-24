@@ -2,7 +2,6 @@ package com.qf.j1904.controller;
 
 import com.qf.j1904.pojo.TbRoles;
 import com.qf.j1904.service.RoleService;
-import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
