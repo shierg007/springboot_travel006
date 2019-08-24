@@ -21,4 +21,6 @@ public interface RoleService {
      */
     int calcMaxPage(int rows);
 
+
+    boolean insertRole(TbRoles role);
 }
