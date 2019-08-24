@@ -3,9 +3,9 @@ package com.qf.j1904.pojo;
 import java.io.Serializable;
 
 public class TbPermissions implements Serializable {
-    private Integer permissionid;
+    private Integer id;
 
-    private Integer parentid;
+    private Integer pId;
 
     private String permissionname;
 
@@ -15,22 +15,32 @@ public class TbPermissions implements Serializable {
 
     private Integer ifvalid;
 
+    private String checked = "false";
+
+    public String getChecked() {
+        return checked;
+    }
+
+    public void setChecked(String checked) {
+        this.checked = checked;
+    }
+
     private static final long serialVersionUID = 1L;
 
-    public Integer getPermissionid() {
-        return permissionid;
+    public Integer getId() {
+        return id;
     }
 
-    public void setPermissionid(Integer permissionid) {
-        this.permissionid = permissionid;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getParentid() {
-        return parentid;
+    public Integer getpId() {
+        return pId;
     }
 
-    public void setParentid(Integer parentid) {
-        this.parentid = parentid;
+    public void setpId(Integer pId) {
+        this.pId = pId;
     }
 
     public String getPermissionname() {
@@ -59,6 +69,19 @@ public class TbPermissions implements Serializable {
 
     public Integer getIfvalid() {
         return ifvalid;
+    }
+
+    @Override
+    public String toString() {
+        return "TbPermissions{" +
+                "id=" + id +
+                ", pId=" + pId +
+                ", permissionname='" + permissionname + '\'' +
+                ", permissiondesc='" + permissiondesc + '\'' +
+                ", permissionurl='" + permissionurl + '\'' +
+                ", ifvalid=" + ifvalid +
+                ", checked='" + checked + '\'' +
+                '}';
     }
 
     public void setIfvalid(Integer ifvalid) {

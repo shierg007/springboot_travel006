@@ -70,6 +70,13 @@ public class ViewController {
         return "member";
     }
 
+    /**
+     * 添加管理员跳转
+     * @param userId 当前用户id
+     * @param nickName 当前用户昵称
+     * @param model 当前用户，可以管理的角色集合
+     * @return 添加管理员页面
+     */
     @RequestMapping("/add_view")
     public String addView(@RequestParam("userId") int userId,
                           @RequestParam("nickName")String nickName,
