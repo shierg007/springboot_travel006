@@ -14,4 +14,11 @@ public interface RoleService {
      */
     List<TbRoles> loadRoles(int page,int rows);
 
+    /**
+     * 计算展示角色信息的最大页码
+     * @param rows 每页显示的行数
+     * @return 最大页码
+     */
+    int calcMaxPage(int rows);
+
 }

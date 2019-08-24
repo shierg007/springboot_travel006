@@ -1,5 +1,6 @@
 package com.qf.j1904.controller;
 
+import com.qf.j1904.pojo.TbRoles;
 import com.qf.j1904.pojo.TbUsers;
 import com.qf.j1904.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -66,5 +68,13 @@ public class ViewController {
             }
         }
         return "member";
+    }
+
+    @RequestMapping("/add_view")
+    public String addView(@RequestParam("userId") int userId,
+                          Model model){
+        List<TbRoles> managedRoles = userService.managedRoles(userId);
+        model.addAttribute("managedRoles",managedRoles);
+        return "add";
     }
 }

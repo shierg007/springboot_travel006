@@ -147,33 +147,37 @@
             <table class="table  table-bordered">
               <thead>
                 <tr >
-                  <th width="30">#</th>
-				  <th width="30"><input type="checkbox" id="checkAll" ></th>
-                  <th>名称</th>
-                  <th width="100">操作</th>
+                  	<th width="30">#</th>
+				  	<th width="30"><input type="checkbox" id="checkAll" ></th>
+                  	<th>名称</th>
+					<th>角色类型</th>
+					<th>是否有效</th>
+                  	<th width="100">操作</th>
                 </tr>
               </thead>
               <tbody>
-<!--                <tr th:each="r:${roleList}">-->
-<!--                  <td th:text="${r.roleId}"></td>-->
-<!--				  <td><input type="checkbox" name="ids" th:value="${r.roleId}"></td>-->
-<!--                  <td th:text="${r.roleName}"></td>-->
-<!--                  <td>-->
+			  	<tr th:each="r:${roles}">
+				  	<td th:text="${r.roleid}"></td>
+				  	<td><input type="checkbox" name="ids" th:value="${r.roleid}"></td>
+				  	<td th:text="${r.rolename}"></td>
+					<td th:text="${r.roletype}"></td>
+					<td th:text="${r.ifvalid}"></td>
+				<td>
 				      <a type="button" class="btn btn-success btn-xs" th:href="@{assign_permission}"><i class=" glyphicon glyphicon-check"></i></a>
 <!--				      <a type="button" class="btn btn-primary btn-xs" th:href="@{loadbyroleId(roleId=${r.roleId})}"><i class=" glyphicon glyphicon-pencil"></i></a>-->
 <!--					  <a type="button" class="btn btn-danger btn-xs" th:href="@{deleterole(ids=${r.roleId})}"><i class=" glyphicon glyphicon-remove" ></i></a>-->
-<!--				  </td>-->
-<!--                </tr>-->
+				 </td>
+             	</tr>
               </tbody>
 			  <tfoot>
 			     <tr >
 				     <td colspan="6" align="center">
 						<ul class="pagination">
-<!--							<li ><a th:href="@{rolehandler(page=1)}">首页</a></li>-->
-<!--							<li ><a th:href="@{rolehandler(page=${currentPage-1})}">上一页</a></li>-->
-<!--							<li class="active" ><a th:text="${currentPage}"> <span class="sr-only">(current)</span></a></li>-->
-<!--							<li><a th:href="@{rolehandler(page=${currentPage+1})}">下一页</a></li>-->
-<!--							<li><a th:href="@{rolehandler(page=${maxPage})}">末页</a></li>-->
+							<li ><a th:href="@{role_handler(page=1)}">首页</a></li>
+							<li ><a th:href="@{role_handler(page=${currentPage-1})}">上一页</a></li>
+							<li class="active" ><a th:text="${currentPage}"> <span class="sr-only">(current)</span></a></li>
+							<li><a th:href="@{role_handler(page=${currentPage+1})}">下一页</a></li>
+							<li><a th:href="@{role_handler(page=${calcMaxPage})}">末页</a></li>
 						</ul>
 					 </td>
 				 </tr>

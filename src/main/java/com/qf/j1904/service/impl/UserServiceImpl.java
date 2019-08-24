@@ -67,5 +67,59 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectPermissionsByLoginName(loginName);
     }
 
+    @Override
+    public List<TbRoles> selectCurrentRole(int userId) {
+        return userMapper.selectCurrentRole(userId);
+    }
 
+    @Override
+    public List<TbRoles> selectNoHaveRole(int userId) {
+        return userMapper.selectNoHaveRole(userId);
+    }
+
+    @Override
+    public boolean addRole(int uid, int rid) {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("uid",uid);
+        map.put("rid",rid);
+        return userMapper.addRole(map)>0;
+    }
+
+    @Override
+    public boolean removeRole(int uid, int rid) {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("uid",uid);
+        map.put("rid",rid);
+        return userMapper.removeRole(map)>0;
+    }
+
+    @Override
+    public List<TbUsers> fuzzyQueryUser(int page, int rows, String keywords) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("loginName","%"+keywords+"%");
+        map.put("nickName","%"+keywords+"%");
+        map.put("email","%"+keywords+"%");
+        PageHelper.startPage(page,rows);
+        return userMapper.fuzzyQueryUser(map);
+    }
+
+    @Override
+    public int calcFuzzyQueryUserMaxPage(int rows,String keywords) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("loginName","%"+keywords+"%");
+        map.put("nickName","%"+keywords+"%");
+        map.put("email","%"+keywords+"%");
+        int count = userMapper.fuzzyQueryUserCount(map);
+        return count%rows == 0 ? count/rows :count/rows+1;
+    }
+
+    @Override
+    public List<TbRoles> managedRoles(int userId) {
+        List<TbRoles> tbRoles = userMapper.selectCurrentRole(userId);
+        int roleId = 0;
+        for (TbRoles role:tbRoles) {
+            roleId = role.getRoleid();
+        }
+        return userMapper.managedRoles(roleId);
+    }
 }

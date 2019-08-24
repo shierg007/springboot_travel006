@@ -20,4 +20,10 @@ public class RoleServiceImpl implements RoleService {
         PageHelper.startPage(page, rows);
         return rolesMapper.selectByExample(null);
     }
+
+    @Override
+    public int calcMaxPage(int rows) {
+        int roleCount = rolesMapper.countByExample(null);
+        return roleCount%rows == 0 ? roleCount/rows : roleCount/rows+1;
+    }
 }

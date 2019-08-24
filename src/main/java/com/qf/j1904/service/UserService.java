@@ -57,4 +57,56 @@ public interface UserService {
      * @return 该账号拥有的权限集合
      */
     List<TbPermissions> selectPermissionsByLoginName(String loginName);
+
+    /**
+     * 用户已拥有角色
+     * @param userId 用户id
+     * @return 角色信息
+     */
+    List<TbRoles> selectCurrentRole(int userId);
+
+    /**
+     * 用户未拥有角色
+     * @param userId 用户id
+     * @return 角色信息
+     */
+    List<TbRoles> selectNoHaveRole(int userId);
+
+    /**
+     * 给用户添加新角色
+     * @param uid 用户id
+     * @param rid 角色id
+     * @return 是否成功
+     */
+    boolean addRole(int uid,int rid);
+    /**
+     * 移除已拥有角色
+     * @param uid 用户id
+     * @param rid 角色id
+     * @return 是否成功
+     */
+    boolean removeRole(int uid,int rid);
+
+    /**
+     * 多条件模糊查询用户信息
+     * @param page 页码
+     * @param rows 每页显示行数
+     * @param keywords 模糊查询关键字
+     * @return 满足条件的数据
+     */
+    List<TbUsers> fuzzyQueryUser(int page,int rows,String keywords);
+
+    /**
+     * 模糊查询后显示的最大页码
+     * @param rows 每页显示的行数
+     * @return 最大页码
+     */
+    int calcFuzzyQueryUserMaxPage(int rows,String keywords);
+
+    /**
+     * 查询可以管理的角色
+     * @param userId 当前用户id
+     * @return 可以管理的角色
+     */
+    List<TbRoles> managedRoles(int userId);
 }

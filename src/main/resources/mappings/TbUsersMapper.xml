@@ -331,4 +331,70 @@
         from
         tb_users
   </select>
+<!--  查询用户所拥有的角色-->
+  <select id="selectCurrentRole" parameterType="int" resultType="com.qf.j1904.pojo.TbRoles">
+    select *
+        from
+        tb_roles
+            where roleId
+                in (
+                    select rid
+                        from
+                            tb_user_role_mapping
+                            where uid=#{userId})
+  </select>
+<!--  查询用户没有的角色-->
+  <select id="selectNoHaveRole" parameterType="int" resultType="com.qf.j1904.pojo.TbRoles">
+    select *
+        from
+        tb_roles
+            where roleId
+                not in (
+                    select rid
+                        from
+                            tb_user_role_mapping
+                            where uid=#{userId})
+  </select>
+<!--  给用户分配新角色-->
+  <insert id="addRole"  parameterType="map" >
+    insert into
+        tb_user_role_mapping
+            values
+                (#{uid},#{rid})
+  </insert>
+<!--  移除用户已拥有的角色
+-->
+  <delete id="removeRole" parameterType="map">
+    delete from
+        tb_user_role_mapping
+        where
+        uid = #{uid}
+        and
+        rid = #{rid}
+  </delete>
+<!--  多条件模糊查询-->
+  <select id="fuzzyQueryUser" resultType="com.qf.j1904.pojo.TbUsers" parameterType="map">
+    select *
+        from tb_users
+        where
+        loginName like #{loginName}
+        or nickName like #{nickName}
+        or email like #{email}
+    </select>
+<!--  模糊查询后的数据数目-->
+  <select id="fuzzyQueryUserCount" resultType="int" parameterType="map">
+    select count(userId)
+        from tb_users
+        where
+        loginName like #{loginName}
+        or nickName like #{nickName}
+        or email like #{email}
+  </select>
+<!--  查询可以管理的管理员角色-->
+  <select id="managedRoles" parameterType="int" resultType="com.qf.j1904.pojo.TbRoles">
+    select *
+        from tb_roles
+        where roleId &lt; #{roleId}
+        and roleId &gt;4
+  </select>
 </mapper>

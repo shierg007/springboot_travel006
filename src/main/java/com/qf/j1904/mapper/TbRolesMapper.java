@@ -19,6 +19,11 @@ public interface TbRolesMapper {
 
     int insertSelective(TbRoles record);
 
+    /**
+     *  非主键查询角色信息
+     * @param example   非主键属性
+     * @return  满足条件的角色信息集合
+     */
     List<TbRoles> selectByExample(TbRolesExample example);
 
     TbRoles selectByPrimaryKey(Integer roleid);

@@ -10,4 +10,8 @@ spring:
 mybatis:
   mapper-locations: mappings/*.xml
   type-aliases-package: com.qf.j1904.pojo
-
+pagehelper:
+  reasonable: true
+  support-methods-arguments: true
+  page-size-zero: true
+  params: count=countSql

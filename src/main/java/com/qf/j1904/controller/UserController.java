@@ -1,5 +1,6 @@
 package com.qf.j1904.controller;
 
+import com.qf.j1904.pojo.TbRoles;
 import com.qf.j1904.pojo.TbUsers;
 import com.qf.j1904.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -12,6 +13,7 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,17 +60,16 @@ public class UserController {
     }
 
     /**
-     * 注册的处理
-     * @param roleType 注册的角色类型（只有会员注册对外开放，管理员账号只能后台添加）
+     * 注册的处理，注册的角色类型默认是member（只有会员注册对外开放，管理员账号只能后台添加）
      * @param user loginname，password
      * @return 登陆页/错误页
      */
     @RequestMapping("/register")
-    public String reg(@RequestParam("roleType") String roleType,TbUsers user){
+    public String reg(TbUsers user){
             ByteSource credentialsSalt = ByteSource.Util.bytes(user.getLoginname());//使用登录名做为salt
             SimpleHash simpleHash = new SimpleHash("MD5", user.getPassword(), credentialsSalt, 1024);
             user.setPassword(simpleHash.toString());
-            boolean b = userService.reg(user, roleType);
+            boolean b = userService.reg(user);
             return b ? "login" : "error";
     }
 
@@ -112,6 +113,8 @@ public class UserController {
     @RequestMapping("/user_handler")
     public String loadAllUser(@RequestParam(defaultValue = "1",required = false)int page,
                               @RequestParam(defaultValue = "8",required = false)int rows,
+                              @RequestParam("userId")Integer userId,
+                              @RequestParam("nickName")String nickName,
                               Model model){
         int calcMaxPage = userService.calcMaxPage(rows);
         if (page<1){
@@ -124,12 +127,72 @@ public class UserController {
         model.addAttribute("users",tbUsers);
         model.addAttribute("currentPage",page);
         model.addAttribute("calcMaxPage",calcMaxPage);
+        model.addAttribute("userId",userId);
+        model.addAttribute("nickName",nickName);
         return "user";
     }
 
-
+    /**
+     * 显示用户的角色信息（已拥有和为拥有）
+     * @param uid 用户id
+     * @param model model放入已拥有角色信息和为拥有的角色信息，用户id
+     * @return 分配角色页面
+     */
     @RequestMapping("/assign_role")
-    public String assignRole(@RequestParam("userId") Integer userId){
+    public String assignRole(@RequestParam(value = "userId") Integer uid,
+                             Model model){
+        List<TbRoles> roles = userService.selectCurrentRole(uid);
+        List<TbRoles> noroles = userService.selectNoHaveRole(uid);
+        model.addAttribute("uid",uid);
+        model.addAttribute("roles",roles);
+        model.addAttribute("noroles",noroles);
         return "assignRole";
+    }
+
+    /**
+     * 对用户完成添加移除角色信息
+     * @param uid 用户id
+     * @param norid 添加的角色id
+     * @param rid 移除的角色id
+     * @return 分配角色的页面
+     */
+    @RequestMapping("/move_role")
+    public String moveRole(@RequestParam("uid") Integer uid,
+                           @RequestParam(value = "noRoles",required = false,defaultValue = "0") Integer norid,
+                           @RequestParam(value = "currentRoles",required = false,defaultValue = "0")Integer rid
+                           ){
+        if (norid == 0){
+            userService.removeRole(uid,rid);
+        }else{
+            userService.addRole(uid,norid);
+        }
+        return "redirect:assign_role?userId="+uid;
+    }
+
+    /**
+     * 模糊查询
+     * @param page 页码
+     * @param rows 行数
+     * @param keywords 关键字
+     * @param model 查询结果，当前页，最大页，关键字
+     * @return 查询结果的显示
+     */
+    @RequestMapping("/fuzzy_query_user")
+    public String fuzzyQueryUser(@RequestParam(defaultValue = "1",required = false)int page,
+                                 @RequestParam(defaultValue = "8",required = false)int rows,
+                                 String keywords,Model model){
+        int calcMaxPage = userService.calcFuzzyQueryUserMaxPage(rows,keywords);
+        if (page<1){
+            page = calcMaxPage;
+        }
+        if (page>calcMaxPage){
+            page = 1;
+        }
+        List<TbUsers> tbUsers = userService.fuzzyQueryUser(page, rows, keywords);
+        model.addAttribute("users",tbUsers);
+        model.addAttribute("currentPage",page);
+        model.addAttribute("calcMaxPage",calcMaxPage);
+        model.addAttribute("keywords",keywords);
+        return "fq_user";
     }
 }

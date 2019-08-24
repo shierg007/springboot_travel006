@@ -2,6 +2,7 @@ package com.qf.j1904.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class TbUsers implements Serializable {
     private Integer userid;
@@ -23,6 +24,16 @@ public class TbUsers implements Serializable {
     private Date createtime;
 
     private Integer state;
+
+    private List<TbRoles> userRole;
+
+    public List<TbRoles> getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(List<TbRoles> userRole) {
+        this.userRole = userRole;
+    }
 
     private static final long serialVersionUID = 1L;
 

@@ -118,4 +118,53 @@ public interface TbUsersMapper {
      * @return 最大id
      */
     int maxUserId();
+
+    /**
+     * 查询用户拥有的角色
+     * @param userId 用户id
+     * @return 角色信息集合
+     */
+    List<TbRoles> selectCurrentRole(int userId);
+
+    /**
+     * 查询用户未拥有的角色信息
+     * @param userId 用户id
+     * @return 角色
+     */
+    List<TbRoles> selectNoHaveRole(int userId);
+
+    /**
+     * 给用户添加新角色
+     * @param map uid，rid
+     * @return count
+     */
+    int addRole(Map<String,Integer> map);
+
+    /**
+     * 移除用户已拥有的角色
+     * @param map uid，rid
+     * @returncount
+     */
+    int removeRole(Map<String,Integer> map);
+
+    /**
+     * 多条件模糊查询
+     * @param map loginName，nickName,email(加%，业务层实现)
+     * @return 用户信息
+     */
+    List<TbUsers> fuzzyQueryUser(Map<String,String> map);
+
+    /**
+     * 模糊查询后的数据数目
+     * @param map loginName，nickName,email(加%，业务层实现)
+     * @return 数据数目
+     */
+    int fuzzyQueryUserCount(Map<String,String> map);
+
+    /**
+     * 查询可以管理的管理员角色（id小于当前登陆的角色id，大于所有会员角色id）
+     * @param userId 当前用户id
+     * @return 可以管理的角色
+     */
+    List<TbRoles> managedRoles(int userId);
 }
