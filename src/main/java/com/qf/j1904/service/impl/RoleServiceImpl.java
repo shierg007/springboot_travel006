@@ -51,4 +51,10 @@ public class RoleServiceImpl implements RoleService {
         return count%rows == 0 ? count/rows : count/rows+1;
     }
 
+//    @Override
+//    public boolean deleteByRoleId(List<Integer> ids) {
+//        rolesMapper.deleteByPrimaryKey()
+//        return false;
+//    }
+
 }
