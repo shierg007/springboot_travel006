@@ -134,4 +134,14 @@ public class UserServiceImpl implements UserService {
         return count1>0 && count2>0;
     }
 
+    @Override
+    public TbUsers selectById(int userId) {
+        return userMapper.selectByPrimaryKey(userId);
+    }
+
+    @Override
+    public boolean updateByPrimaryKeySelective(TbUsers user) {
+        return userMapper.updateByPrimaryKeySelective(user)>0;
+    }
+
 }

@@ -19,7 +19,7 @@ public class RoleController {
     private RoleService roleService;
 
     /**
-     * 展示所有角色嘻嘻纳西
+     * 展示所有角色
      * @param rows 每页显示行数
      * @param page 当前页码
      * @param userId 当前用户id

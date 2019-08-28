@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.j1904.mapper.TbTravelproMapper" >
+  <resultMap id="BaseResultMap" type="com.qf.j1904.pojo.TbTravelpro" >
+    <id column="travelId" property="travelid" jdbcType="INTEGER" />
+    <result column="travelName" property="travelname" jdbcType="VARCHAR" />
+    <result column="travelPrice" property="travelprice" jdbcType="DECIMAL" />
+    <result column="travelAdress" property="traveladress" jdbcType="VARCHAR" />
+    <result column="travelTime" property="traveltime" jdbcType="INTEGER" />
+    <result column="travelType" property="traveltype" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="changeTime" property="changetime" jdbcType="TIMESTAMP" />
+    <result column="operator" property="operator" jdbcType="INTEGER" />
+    <result column="travelInfo" property="travelinfo" jdbcType="VARCHAR" />
+    <result column="endingTime" property="endingtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    travelId, travelName, travelPrice, travelAdress, travelTime, travelType, createTime, 
+    changeTime, operator, travelInfo, endingTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qf.j1904.pojo.TbTravelproExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_travelpro
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_travelpro
+    where travelId = #{travelid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_travelpro
+    where travelId = #{travelid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qf.j1904.pojo.TbTravelproExample" >
+    delete from tb_travelpro
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qf.j1904.pojo.TbTravelpro" >
+    insert into tb_travelpro (travelId, travelName, travelPrice, 
+      travelAdress, travelTime, travelType, 
+      createTime, changeTime, operator, 
+      travelInfo, endingTime)
+    values (#{travelid,jdbcType=INTEGER}, #{travelname,jdbcType=VARCHAR}, #{travelprice,jdbcType=DECIMAL}, 
+      #{traveladress,jdbcType=VARCHAR}, #{traveltime,jdbcType=INTEGER}, #{traveltype,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{changetime,jdbcType=TIMESTAMP}, #{operator,jdbcType=INTEGER}, 
+      #{travelinfo,jdbcType=VARCHAR}, #{endingtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.j1904.pojo.TbTravelpro" >
+    insert into tb_travelpro
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="travelid != null" >
+        travelId,
+      </if>
+      <if test="travelname != null" >
+        travelName,
+      </if>
+      <if test="travelprice != null" >
+        travelPrice,
+      </if>
+      <if test="traveladress != null" >
+        travelAdress,
+      </if>
+      <if test="traveltime != null" >
+        travelTime,
+      </if>
+      <if test="traveltype != null" >
+        travelType,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="changetime != null" >
+        changeTime,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="travelinfo != null" >
+        travelInfo,
+      </if>
+      <if test="endingtime != null" >
+        endingTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="travelid != null" >
+        #{travelid,jdbcType=INTEGER},
+      </if>
+      <if test="travelname != null" >
+        #{travelname,jdbcType=VARCHAR},
+      </if>
+      <if test="travelprice != null" >
+        #{travelprice,jdbcType=DECIMAL},
+      </if>
+      <if test="traveladress != null" >
+        #{traveladress,jdbcType=VARCHAR},
+      </if>
+      <if test="traveltime != null" >
+        #{traveltime,jdbcType=INTEGER},
+      </if>
+      <if test="traveltype != null" >
+        #{traveltype,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changetime != null" >
+        #{changetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="travelinfo != null" >
+        #{travelinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="endingtime != null" >
+        #{endingtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qf.j1904.pojo.TbTravelproExample" resultType="java.lang.Integer" >
+    select count(*) from tb_travelpro
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_travelpro
+    <set >
+      <if test="record.travelid != null" >
+        travelId = #{record.travelid,jdbcType=INTEGER},
+      </if>
+      <if test="record.travelname != null" >
+        travelName = #{record.travelname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.travelprice != null" >
+        travelPrice = #{record.travelprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.traveladress != null" >
+        travelAdress = #{record.traveladress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.traveltime != null" >
+        travelTime = #{record.traveltime,jdbcType=INTEGER},
+      </if>
+      <if test="record.traveltype != null" >
+        travelType = #{record.traveltype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.changetime != null" >
+        changeTime = #{record.changetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operator != null" >
+        operator = #{record.operator,jdbcType=INTEGER},
+      </if>
+      <if test="record.travelinfo != null" >
+        travelInfo = #{record.travelinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endingtime != null" >
+        endingTime = #{record.endingtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_travelpro
+    set travelId = #{record.travelid,jdbcType=INTEGER},
+      travelName = #{record.travelname,jdbcType=VARCHAR},
+      travelPrice = #{record.travelprice,jdbcType=DECIMAL},
+      travelAdress = #{record.traveladress,jdbcType=VARCHAR},
+      travelTime = #{record.traveltime,jdbcType=INTEGER},
+      travelType = #{record.traveltype,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      changeTime = #{record.changetime,jdbcType=TIMESTAMP},
+      operator = #{record.operator,jdbcType=INTEGER},
+      travelInfo = #{record.travelinfo,jdbcType=VARCHAR},
+      endingTime = #{record.endingtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.j1904.pojo.TbTravelpro" >
+    update tb_travelpro
+    <set >
+      <if test="travelname != null" >
+        travelName = #{travelname,jdbcType=VARCHAR},
+      </if>
+      <if test="travelprice != null" >
+        travelPrice = #{travelprice,jdbcType=DECIMAL},
+      </if>
+      <if test="traveladress != null" >
+        travelAdress = #{traveladress,jdbcType=VARCHAR},
+      </if>
+      <if test="traveltime != null" >
+        travelTime = #{traveltime,jdbcType=INTEGER},
+      </if>
+      <if test="traveltype != null" >
+        travelType = #{traveltype,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changetime != null" >
+        changeTime = #{changetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="travelinfo != null" >
+        travelInfo = #{travelinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="endingtime != null" >
+        endingTime = #{endingtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where travelId = #{travelid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.j1904.pojo.TbTravelpro" >
+    update tb_travelpro
+    set travelName = #{travelname,jdbcType=VARCHAR},
+      travelPrice = #{travelprice,jdbcType=DECIMAL},
+      travelAdress = #{traveladress,jdbcType=VARCHAR},
+      travelTime = #{traveltime,jdbcType=INTEGER},
+      travelType = #{traveltype,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      changeTime = #{changetime,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=INTEGER},
+      travelInfo = #{travelinfo,jdbcType=VARCHAR},
+      endingTime = #{endingtime,jdbcType=TIMESTAMP}
+    where travelId = #{travelid,jdbcType=INTEGER}
+  </update>
+</mapper>

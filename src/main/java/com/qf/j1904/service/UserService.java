@@ -117,4 +117,18 @@ public interface UserService {
      * @return 是否成功
      */
     boolean addUserOfAdmin(TbUsers user, int roleId);
+
+    /**
+     * 根据id查询用户信息
+     * @param userId id
+     * @return 用户信息
+     */
+    TbUsers selectById(int userId);
+
+    /**
+     * 根据主键动态修改用户信息（参数user中必须有id信息）（实名认证补充信息）
+     * @param user 用户信息
+     * @return 是否更新成功
+     */
+    boolean updateByPrimaryKeySelective(TbUsers user);
 }

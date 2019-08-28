@@ -31,6 +31,11 @@ public class ViewController {
         return "reg";
     }
 
+    @RequestMapping("/index")
+    public String indexView(){
+        return "index";
+    }
+
     /**
      * 后台页面
      * @param model 将当前登陆的账号信息填入model中（通过subject获得loginName，loginName获得账号所有信息）
@@ -52,20 +57,16 @@ public class ViewController {
     }
     /**
      * 前台页面
-     * @param model 将当前登陆的账号信息填入model中（通过subject获得loginName，loginName获得账号所有信息）
+     * @param model 将当前登陆的账号信息填入model
      * @return 前台页面
      */
     @RequiresRoles(value = "member")
     @RequestMapping("/member")
-    public String memberView(Model model){
-        Object principal = SecurityUtils.getSubject().getPrincipal();
-        if (!StringUtils.isEmpty(principal)){
-            String loginName = (String) principal;
-            List<TbUsers> tbUsers = userService.selectByLoginName(loginName);
-            for (TbUsers user:tbUsers
-            ) {
-                model.addAttribute("user",user);
-            }
+    public String memberView(@RequestParam("loginName")String loginName, Model model){
+        List<TbUsers> user = userService.selectByLoginName(loginName);
+        for (TbUsers u:user
+             ) {
+            model.addAttribute("user",u);
         }
         return "member";
     }
@@ -86,6 +87,19 @@ public class ViewController {
         model.addAttribute("userId",userId);
         model.addAttribute("nickName",nickName);
         return "add";
+    }
+
+    /**
+     * 实名认证跳转
+     * @param userId 用户id
+     * @param model
+     * @return 实名认证页面
+     */
+    @RequestMapping("/apply1")
+    public String applyView(@RequestParam("userId")Integer userId,Model model){
+        TbUsers user = userService.selectById(userId);
+        model.addAttribute("user",user);
+        return "apply1";
     }
 
 }
